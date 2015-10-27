@@ -24,9 +24,13 @@ themeMe.controller("loginCtrl", function($scope, $rootScope, $firebase, $firebas
     $scope.user = user;
   });
 
-  // Upon successful logout, reset the user object
+  // Upon successful logout, reset the user object and clear cookies
   $rootScope.$on("$firebaseSimpleLogin:logout", function(event) {
     $scope.user = null;
+
+    window.cookies.clear(function() {
+      console.log("Cookies cleared!");
+    });
   });
 
   // Log any login-related errors to the console
